@@ -1,39 +1,35 @@
-package uni.miskolc.teszteles;
+package hu.uni.miskolc.teszteles.core;
 
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.core.HangalRendelkezo;
-import org.core.Kivitel;
-import org.core.Uzemanyag;
-import org.core.Valto;
+import hu.uni.miskolc.teszteles.core.exceptions.AjtokSzamaNemMegfelelo;
 
-public class Auto implements HangalRendelkezo {
-	//adott szöveget, adott értéket tárol = Map
-	public static Map<String, Integer> hengerurtartalomErtek;
-	
+public class Auto implements HanggalRendelkezo {
+	public static Map<String, Integer> hengerurtartalomErtekek;
+
 	static {
-		hengerurtartalomErtek = new HashMap<>();
-		hengerurtartalomErtek.put("1.0", 998);
-		hengerurtartalomErtek.put("1.2", 1199);
-		hengerurtartalomErtek.put("1.4", 1390);
-		hengerurtartalomErtek.put("1.6", 1500);
+		hengerurtartalomErtekek = new HashMap<>();
+		hengerurtartalomErtekek.put("1.0", 998);
+		hengerurtartalomErtekek.put("1.2", 1199);
+		hengerurtartalomErtekek.put("1.4", 1390);
+		hengerurtartalomErtekek.put("1.6", 1560);
 	}
-	
+
 	private String gyarto;
-	private String model;
+	private String modell;
 	private Integer hengerurtartalom;
 	private String rendszam;
 	private Uzemanyag uzemanyag;
-	private LocalDate gyarasiIdo;
-	private String szin;
+	private LocalDate gyartasiIdo;
+	private String szinHex;
 	private boolean korozott;
 	private String forgalmiSzama;
 	private Valto valto;
 	private Kivitel kivitel;
 	private int ajtokSzama;
-	
+
 	@Override
 	public void dudal() {
 		System.out.println("Tütü");
@@ -47,12 +43,12 @@ public class Auto implements HangalRendelkezo {
 		this.gyarto = gyarto;
 	}
 
-	public String getModel() {
-		return model;
+	public String getModell() {
+		return modell;
 	}
 
-	protected void setModel(String model) {
-		this.model = model;
+	protected void setModell(String modell) {
+		this.modell = modell;
 	}
 
 	public Integer getHengerurtartalom() {
@@ -60,7 +56,7 @@ public class Auto implements HangalRendelkezo {
 	}
 
 	public void setHengerurtartalom(String hengerurtartalom) {
-		this.hengerurtartalom = hengerurtartalomErtek.get(hengerurtartalom);
+		this.hengerurtartalom = hengerurtartalomErtekek.get(hengerurtartalom);
 	}
 
 	public String getRendszam() {
@@ -79,20 +75,20 @@ public class Auto implements HangalRendelkezo {
 		this.uzemanyag = uzemanyag;
 	}
 
-	public LocalDate getGyarasiIdo() {
-		return gyarasiIdo;
+	public LocalDate getGyartasiIdo() {
+		return gyartasiIdo;
 	}
 
-	public void setGyarasiIdo(LocalDate gyarasiIdo) {
-		this.gyarasiIdo = gyarasiIdo;
+	protected void setGyartasiIdo(LocalDate gyartasiIdo) {
+		this.gyartasiIdo = gyartasiIdo;
 	}
 
-	public String getSzin() {
-		return szin;
+	public String getSzinHex() {
+		return szinHex;
 	}
 
-	public void setSzin(String szin) {
-		this.szin = szin;
+	public void setSzinHex(String szinHex) {
+		this.szinHex = szinHex;
 	}
 
 	public boolean isKorozott() {
@@ -138,27 +134,26 @@ public class Auto implements HangalRendelkezo {
 		this.ajtokSzama = ajtokSzama;
 	}
 
-	public Auto(String gyarto, String model, String hengerurtartalom, String rendszam,
-			Uzemanyag uzemanyag, LocalDate gyarasiIdo, String szin, boolean korozott, String forgalmiSzama, Valto valto,
-			Kivitel kivitel, int ajtokSzama) {
+	public Auto(String gyarto, String modell, String hengerurtartalom, String rendszam, Uzemanyag uzemanyag,
+			LocalDate gyartasiIdo, String szinHex, boolean korozott, String forgalmiSzama, Valto valto, Kivitel kivitel,
+			int ajtokSzama) {
 		super();
 		this.gyarto = gyarto;
-		this.model = model;
+		this.modell = modell;
 		setHengerurtartalom(hengerurtartalom);
 		this.rendszam = rendszam;
 		this.uzemanyag = uzemanyag;
-		this.gyarasiIdo = gyarasiIdo;
-		this.szin = szin;
+		this.gyartasiIdo = gyartasiIdo;
+		this.szinHex = szinHex;
 		this.korozott = korozott;
 		this.forgalmiSzama = forgalmiSzama;
 		this.valto = valto;
 		this.kivitel = kivitel;
 		this.ajtokSzama = ajtokSzama;
 	}
-	
-	
+
 	public Auto() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 }
