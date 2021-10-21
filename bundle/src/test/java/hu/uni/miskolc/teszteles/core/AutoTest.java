@@ -1,11 +1,14 @@
 package hu.uni.miskolc.teszteles.core;
 
+import static org.junit.Assert.assertEquals;
+
 import java.time.LocalDate;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import hu.uni.miskolc.teszteles.core.exceptions.AjtokSzamaNemMegfelelo;
+import junit.framework.Assert;
 
 public class AutoTest {
 
@@ -98,5 +101,18 @@ public class AutoTest {
 	public void testKesoiGyartasiIdo() throws GyartasiIdoNemMegfelelo{
 		String gyartasiIdo = "2022-04-17";
 		testAuto.setGyartasiIdo(LocalDate.parse(gyartasiIdo));
+	}
+	
+	@Test
+	public void testSzinkodSetter() {
+		String szinkod = "#FFFFFF";
+		testAuto.setSzinHex(szinkod);
+		assertEquals(szinkod, testAuto.szinHex);
+	}
+	
+	@Test
+	public void testSzinkodGetter() {
+		testAuto.szinHex = "#FFFFFF";
+		assertEquals(testAuto.szinHex, testAuto.getSzinHex());
 	}
 }
