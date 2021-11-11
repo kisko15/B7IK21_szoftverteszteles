@@ -62,13 +62,17 @@ public class Auto implements HanggalRendelkezo {
 	public void setHengerurtartalom(String hengerurtartalom) {
 		this.hengerurtartalom = hengerurtartalomErtekek.get(hengerurtartalom);
 	}
+	
+	public void setHengerurtartalom(Integer hengerurtartalom) {
+		this.hengerurtartalom = hengerurtartalom;
+	}
 
 	public String getRendszam() {
 		return rendszam;
 	}
 
 	public void setRendszam(String rendszam) throws RednszamNemMegfelelo {
-		String regex = "^([^a-zQ0-9]{3}-(?!000)\\d{3})$";
+		String regex="^([^a-z0-9Q]{3}-(?!000)\\d{3})$";
 		if(!rendszam.matches(regex)) {
 			throw new RednszamNemMegfelelo(rendszam);
 		}
@@ -88,7 +92,7 @@ public class Auto implements HanggalRendelkezo {
 	}
 
 	protected void setGyartasiIdo(LocalDate gyartasiIdo) throws GyartasiIdoNemMegfelelo {
-		if((gyartasiIdo.isAfter(LocalDate.now())|| (gyartasiIdo.isBefore(LocalDate.of(1885, 1, 1))))) {
+		if (gyartasiIdo.isAfter(LocalDate.now()) || gyartasiIdo.isBefore(LocalDate.of(1885, 1, 1))) {
 			throw new GyartasiIdoNemMegfelelo(gyartasiIdo);
 		}
 		this.gyartasiIdo = gyartasiIdo;
@@ -147,26 +151,50 @@ public class Auto implements HanggalRendelkezo {
 
 	public Auto(String gyarto, String modell, String hengerurtartalom, String rendszam, Uzemanyag uzemanyag,
 			LocalDate gyartasiIdo, String szinHex, boolean korozott, String forgalmiSzama, Valto valto, Kivitel kivitel,
-			int ajtokSzama) {
+			int ajtokSzama) throws RednszamNemMegfelelo, GyartasiIdoNemMegfelelo, AjtokSzamaNemMegfelelo {
 		super();
-		this.gyarto = gyarto;
-		this.modell = modell;
+		setGyarto(gyarto);
+		setModell(modell);
 		setHengerurtartalom(hengerurtartalom);
-		this.rendszam = rendszam;
-		this.uzemanyag = uzemanyag;
-		this.gyartasiIdo = gyartasiIdo;
-		this.szinHex = szinHex;
-		this.korozott = korozott;
-		this.forgalmiSzama = forgalmiSzama;
-		this.valto = valto;
-		this.kivitel = kivitel;
-		this.ajtokSzama = ajtokSzama;
+		setRendszam(rendszam);
+		setUzemanyag(uzemanyag);
+		setGyartasiIdo(gyartasiIdo);
+		setSzinHex(szinHex);
+		setKorozott(korozott);
+		setForgalmiSzama(forgalmiSzama);
+		setValto(valto);
+		setKivitel(kivitel);
+		setAjtokSzama(ajtokSzama);
+	}
+	
+	public Auto(String gyarto, String modell, Integer hengerurtartalom, String rendszam, Uzemanyag uzemanyag,
+			LocalDate gyartasiIdo, String szinHex, boolean korozott, String forgalmiSzama, Valto valto, Kivitel kivitel,
+			int ajtokSzama) throws RednszamNemMegfelelo, GyartasiIdoNemMegfelelo, AjtokSzamaNemMegfelelo {
+		super();
+		setGyarto(gyarto);
+		setModell(modell);
+		setHengerurtartalom(hengerurtartalom);
+		setRendszam(rendszam);
+		setUzemanyag(uzemanyag);
+		setGyartasiIdo(gyartasiIdo);
+		setSzinHex(szinHex);
+		setKorozott(korozott);
+		setForgalmiSzama(forgalmiSzama);
+		setValto(valto);
+		setKivitel(kivitel);
+		setAjtokSzama(ajtokSzama);
 	}
 
 	public Auto() {
-		
+		// TODO Auto-generated constructor stub
 	}
-	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(ajtokSzama, forgalmiSzama, gyartasiIdo, gyarto, hengerurtartalom, kivitel, korozott, modell,
+				rendszam, szinHex, uzemanyag, valto);
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -183,5 +211,17 @@ public class Auto implements HanggalRendelkezo {
 				&& Objects.equals(rendszam, other.rendszam) && Objects.equals(szinHex, other.szinHex)
 				&& uzemanyag == other.uzemanyag && valto == other.valto;
 	}
+
+	@Override
+	public String toString() {
+		return "Auto [gyarto=" + gyarto + ", modell=" + modell + ", hengerurtartalom=" + hengerurtartalom
+				+ ", rendszam=" + rendszam + ", uzemanyag=" + uzemanyag + ", gyartasiIdo=" + gyartasiIdo + ", szinHex="
+				+ szinHex + ", korozott=" + korozott + ", forgalmiSzama=" + forgalmiSzama + ", valto=" + valto
+				+ ", kivitel=" + kivitel + ", ajtokSzama=" + ajtokSzama + "]";
+	}
+	
+	
+	
+	
 
 }

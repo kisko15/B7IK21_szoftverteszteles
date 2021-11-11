@@ -18,10 +18,12 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 
 import hu.uni.miskolc.teszteles.core.Auto;
+import hu.uni.miskolc.teszteles.core.GyartasiIdoNemMegfelelo;
 import hu.uni.miskolc.teszteles.core.RednszamNemMegfelelo;
 import hu.uni.miskolc.teszteles.core.enumm.Kivitel;
 import hu.uni.miskolc.teszteles.core.enumm.Uzemanyag;
 import hu.uni.miskolc.teszteles.core.enumm.Valto;
+import hu.uni.miskolc.teszteles.core.exceptions.AjtokSzamaNemMegfelelo;
 import hu.uni.miskolc.teszteles.dao.AutoDao;
 import hu.uni.miskolc.teszteles.dao.exception.AutoNemTalalhato;
 import hu.uni.miskolc.teszteles.dao.exception.RendszerMarFoglalt;
@@ -33,7 +35,7 @@ public class AutoServiceTest {
 	private static AutoDao mock;
 
 	@Before
-	public void setUp() throws AutoNemTalalhato, RednszamNemMegfelelo, RendszerMarFoglalt {
+	public void setUp() throws AutoNemTalalhato, RednszamNemMegfelelo, RendszerMarFoglalt, GyartasiIdoNemMegfelelo, AjtokSzamaNemMegfelelo {
 		mock = Mockito.mock(AutoDao.class);
 		service = new AutoService(mock);
 		Auto auto = new Auto("Opel","Astra","1.2" , "ABC-123", Uzemanyag.BENZIN, LocalDate.of(2017, 5,12),
@@ -76,7 +78,7 @@ public class AutoServiceTest {
 	}
 
 	@Test
-	public void testAutoMasolat() {
+	public void testAutoMasolat() throws RednszamNemMegfelelo, GyartasiIdoNemMegfelelo, AjtokSzamaNemMegfelelo {
 		Auto auto = new Auto("Opel","Astra","1.2" , "ABC-123", Uzemanyag.BENZIN, LocalDate.of(2017, 5,12),
 				"#dedede",	false, "123456EE", Valto.MANUALIS_5_FOKOZAT, Kivitel.KOMBI, 5);
 		MatcherAssert.assertThat(autok, Matchers.hasItem(auto));
@@ -92,13 +94,13 @@ public class AutoServiceTest {
 	}
 
 	@Test(expected = RendszerMarFoglalt.class)
-	public void testDuplum() throws RendszerMarFoglalt {
+	public void testDuplum() throws RendszerMarFoglalt, RednszamNemMegfelelo, GyartasiIdoNemMegfelelo, AjtokSzamaNemMegfelelo {
 		Auto auto = new Auto("Opel","Astra","1.2" , "ABC-123", Uzemanyag.BENZIN, LocalDate.of(2017, 5,12),
 				"#dedede",	false, "123456EE", Valto.MANUALIS_5_FOKOZAT, Kivitel.KOMBI, 5);
 		service.addAuto(auto);
 	}
 	@Test
-	public void testMegNemFelvittAuto() throws RendszerMarFoglalt {
+	public void testMegNemFelvittAuto() throws RendszerMarFoglalt, RednszamNemMegfelelo, GyartasiIdoNemMegfelelo, AjtokSzamaNemMegfelelo {
 		Auto auto = new Auto("Opel","Astra","1.2" , "AAA-123", Uzemanyag.DIESEL, LocalDate.of(2016, 11,12),
 				"#ffffff",	false, "123789SD", Valto.MANUALIS_5_FOKOZAT, Kivitel.KOMBI, 5);
 		service.addAuto(auto);

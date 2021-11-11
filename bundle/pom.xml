@@ -28,6 +28,12 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.12.5</version>
 		</dependency>
+		<dependency>
+    	<groupId>org.mongodb</groupId>
+   	 	<artifactId>mongo-java-driver</artifactId>
+    	<version>3.12.10</version>
+	</dependency>
+  
 	</dependencies>
 
 	<build>
@@ -80,5 +86,6 @@
   <modules>
     <module>core</module>
     <module>service</module>
+    <module>dao-mongo</module>
   </modules>
 </project>
