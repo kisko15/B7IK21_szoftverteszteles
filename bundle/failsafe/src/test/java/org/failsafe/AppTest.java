@@ -1,4 +1,4 @@
-package org.dao.mongo;
+package org.failsafe;
 
 import static org.junit.Assert.assertTrue;
 

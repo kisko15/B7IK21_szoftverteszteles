@@ -44,13 +44,13 @@ public class AutoDAOMongo implements AutoDao {
 
 	@Override
 	public Collection<Auto> readAllAutos() {
-		return collection.find().map(AutoPojoConverter::pojoToAutoConvert).into(new ArrayList());
+		return collection.find().map(AutoPojoConverter::pojoToAutoConvert).into(new ArrayList<>());
 		
 	}
 
 	@Override
 	public Auto readAutoById(String rendszam) throws AutoNemTalalhato, RednszamNemMegfelelo {
-	return collection.find(eq("_id",rendszam)).map(AutoPojoConverter::pojoToAutoConvert).first();
+		return collection.find(eq("_id",rendszam)).map(AutoPojoConverter::pojoToAutoConvert).first();
 	}
 
 	@Override
@@ -79,6 +79,10 @@ public class AutoDAOMongo implements AutoDao {
 	public void deleteAutoById(String rendszam) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void deleteAll() {
+		collection.drop();
 	}
 
 }

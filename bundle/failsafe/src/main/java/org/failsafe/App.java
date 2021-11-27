@@ -1,4 +1,4 @@
-package org.dao.mongo;
+package org.failsafe;
 
 /**
  * Hello world!

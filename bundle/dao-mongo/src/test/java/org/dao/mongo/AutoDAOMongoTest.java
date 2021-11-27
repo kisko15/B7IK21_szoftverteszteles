@@ -17,7 +17,7 @@ import hu.uni.miskolc.teszteles.dao.exception.AutoNemTalalhato;
 import hu.uni.miskolc.teszteles.dao.exception.RendszerMarFoglalt;
 
 public class AutoDAOMongoTest {
-	@Ignore
+	
 	@Test
 	public void testDatabase() throws RednszamNemMegfelelo, GyartasiIdoNemMegfelelo, AjtokSzamaNemMegfelelo, RendszerMarFoglalt, AutoNemTalalhato {
 		//Csak hogy teszteljük az adatbázis kapcsolatot

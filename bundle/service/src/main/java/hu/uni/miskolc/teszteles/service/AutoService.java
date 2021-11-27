@@ -28,7 +28,7 @@ private AutoDao dao;
 
 	public Collection<Auto> getAllAuto(){
 		return dao.readAllAutos();
-	};
+	}
 	
 	public Auto getAutoByRendszam(String rendszam) throws AutoNemTalalhato, RednszamNemMegfelelo {
 		return dao.readAutoById(rendszam);

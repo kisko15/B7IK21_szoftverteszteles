@@ -50,14 +50,12 @@ public class AutoServiceTest {
 		autok.add(auto3);
 
 
-		Mockito.when(mock.readAutoById(ArgumentMatchers.anyString())).
-		thenThrow(new AutoNemTalalhato());
+		Mockito.when(mock.readAutoById(ArgumentMatchers.anyString())).thenThrow(new AutoNemTalalhato());
 		Mockito.doReturn(auto).when(mock).readAutoById("ABC-123");
 		Mockito.doReturn(auto2).when(mock).readAutoById("ABC-222");
 		Mockito.doReturn(auto3).when(mock).readAutoById("ABC-333");
 		Mockito.when(mock.readAllAutos()).thenReturn(autok);
-		Mockito.doThrow(RednszamNemMegfelelo.class).when(mock).readAutoById(
-				AdditionalMatchers.not(Mockito.matches("\\w\\w\\w-\\d\\d\\d")));
+		Mockito.doThrow(RednszamNemMegfelelo.class).when(mock).readAutoById(AdditionalMatchers.not(Mockito.matches("\\w\\w\\w-\\d\\d\\d")));
 		Mockito.doThrow(RendszerMarFoglalt.class).when(mock).createAuto(auto);
 		Mockito.doThrow(RendszerMarFoglalt.class).when(mock).createAuto(auto2);
 		Mockito.doThrow(RendszerMarFoglalt.class).when(mock).createAuto(auto3);
@@ -105,5 +103,6 @@ public class AutoServiceTest {
 				"#ffffff",	false, "123789SD", Valto.MANUALIS_5_FOKOZAT, Kivitel.KOMBI, 5);
 		service.addAuto(auto);
 		Mockito.verify(mock, times(1)).createAuto(auto);
+		System.out.println(mock.readAllAutos());
 	}
 }
